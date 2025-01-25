@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { cache } from "react";
 import { db } from "@/db/drizzle";
 import { sql } from "drizzle-orm";
+import { User } from "./types";
 
 export const verifySession = cache(async () => {
   const cookie = (await cookies()).get("session")?.value;
@@ -18,19 +19,15 @@ export const verifySession = cache(async () => {
   return { isAuth: true, userId: session.userId as string };
 });
 
-type User = {
-  id: number;
-  username: string;
-  role: string;
-};
-
-export const getUser = cache(async (): Promise<User | null> => {
-  const session = await verifySession(); // This ensures the user is authenticated
+export const getUser = cache(async () => {
+  const session = await verifySession();
 
   try {
-    const data = await db.execute(
-      sql`SELECT id, username, role FROM users WHERE id = ${session.userId} LIMIT 1`
-    );
+    const data = await db.execute<User>(sql`
+      SELECT id, username, role, created_at FROM users
+      WHERE id = ${session.userId}
+      LIMIT 1
+    `);
 
     const user = data.rows[0];
 
@@ -39,7 +36,7 @@ export const getUser = cache(async (): Promise<User | null> => {
       return null;
     }
 
-    return user as User;
+    return user;
   } catch (error) {
     console.error("Failed to fetch user:", error);
     return null;

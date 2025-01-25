@@ -1,11 +1,5 @@
-import LogoutButton from "./components/logout-button";
-import Profile from "./components/profile";
+import { redirect } from "next/navigation";
 
 export default async function HomePage() {
-  return (
-    <div>
-      <Profile />
-      <LogoutButton />
-    </div>
-  );
+  redirect("/dashboard");
 }

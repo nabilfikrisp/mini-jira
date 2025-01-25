@@ -2,7 +2,7 @@
 
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { SessionPayload } from "@/app/lib/types";
+import { SessionPayload } from "@/lib/types";
 
 const secretKey = process.env.SESSION_SECRET;
 if (!secretKey) {

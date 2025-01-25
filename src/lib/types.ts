@@ -1,3 +1,5 @@
+import { tasks, users } from "@/db/schema";
+import { InferSelectModel } from "drizzle-orm";
 import { z } from "zod";
 
 export const LoginFormSchema = z.object({
@@ -27,3 +29,19 @@ export type SessionPayload = {
   userId: string;
   expiresAt: Date;
 };
+
+export type User = Omit<InferSelectModel<typeof users>, "password">;
+export type UserWithPassword = InferSelectModel<typeof users>;
+export type Task = InferSelectModel<typeof tasks>;
+export type TaskStatus = Task["status"];
+
+export const CreateTaskFormSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+  assignedTo: z
+    .string()
+    .optional()
+    .transform((val) => (val ? parseInt(val, 10) : null)),
+});
+
+export type CreateTaskFormType = z.infer<typeof CreateTaskFormSchema>;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { login } from "@/app/actions/auth.action";
+import { login } from "@/actions/auth.action";
 
 export default function LoginForm() {
   const [state, action, pending] = useActionState(login, undefined);
@@ -9,9 +9,7 @@ export default function LoginForm() {
   return (
     <form action={action} className="space-y-4">
       {/* Error Message */}
-      {state?.message && !state.success && (
-        <p className="text-center text-sm text-my-accent-two">{state.message}</p>
-      )}
+      {state?.message && <p className="text-center text-sm text-my-accent-two">{state.message}</p>}
 
       {/* Username Field */}
       <div>
