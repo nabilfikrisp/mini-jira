@@ -5,6 +5,7 @@ services:
     environment:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=dbpassword
+      - POSTGRES_DB=mini-jira
     volumes:
       - pgdata:/var/lib/postgresql/data
   web:
@@ -17,10 +18,12 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://dbuser:dbpassword@db:5432/todo
-      - NODE_ENV=production
+      - DATABASE_URL=postgres://dbuser:dbpassword@db:5432/mini-jira
+      - SESSION_SECRET="random123"
     command: >
-      sh -c "npx prisma migrate reset --force &&
+      sh -c "npm run db:generate &&
+             npm run db:migrate &&
+             npm run db:seed &&
              npm run build &&
              npm start"
 volumes:
