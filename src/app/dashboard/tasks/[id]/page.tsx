@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 import TaskDetailForm from "./form";
 import { getUser } from "@/lib/data-access-layer";
 
-export default async function TaskDetailPage(props: { params: { id: string } }) {
+type Params = Promise<{ id: string }>;
+
+export default async function TaskDetailPage(props: { params: Params }) {
   const params = await props.params;
   const taskId = params.id;
 

@@ -1,18 +1,19 @@
+import { hash } from "argon2";
 import { db } from "./drizzle";
 import { users } from "./schema";
-import { reset } from "drizzle-seed";
-import * as schema from "./schema";
-import { sql } from "drizzle-orm";
-import { hash } from "argon2";
 
 async function seed() {
   try {
-    await reset(db, schema);
-    await db.execute(sql`ALTER SEQUENCE users_id_seq RESTART WITH 1;`);
+    const existingUsers = await db.select().from(users).limit(1);
+
+    if (existingUsers.length > 0) {
+      console.log("Users already exist. Skipping seeding.");
+      return;
+    }
 
     const hashedPassword = await hash("12345");
 
-    const insertedUsers = await db
+    await db
       .insert(users)
       .values([
         { username: "team_leader", password: hashedPassword, role: "LEAD" },
@@ -21,11 +22,11 @@ async function seed() {
       ])
       .returning();
 
-    console.log("Inserted users:", insertedUsers);
+    console.log("Successfully seeded users.");
   } catch (error) {
     console.error("Error seeding users:", error);
   } finally {
-    process.exit(0);
+    process.exit(0); // Exit the process after seeding
   }
 }
 

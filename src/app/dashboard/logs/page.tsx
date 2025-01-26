@@ -15,7 +15,7 @@ export default async function LogsPage() {
 
   if (logs === null) {
     return (
-      <div className="flex h-full flex-col">
+      <div className="flex h-full flex-col p-5">
         <h1 className="mb-6 text-2xl font-bold text-my-headline">Task Logs</h1>
         <p className="text-my-paragraph">Error fetching task logs. Please try again later.</p>
       </div>
@@ -24,7 +24,7 @@ export default async function LogsPage() {
 
   if (logs.length === 0) {
     return (
-      <div className="flex h-full flex-col">
+      <div className="flex h-full flex-col p-5">
         <h1 className="mb-6 text-2xl font-bold text-my-headline">Task Logs</h1>
         <p className="text-my-paragraph">No task logs found.</p>
       </div>
@@ -50,7 +50,7 @@ export default async function LogsPage() {
       <h1 className="mb-6 text-2xl font-bold text-my-headline">Task Logs</h1>
 
       {/* Logs List */}
-      <div className="space-y-4 overflow-auto pr-3 pb-5">
+      <div className="space-y-4 overflow-auto pb-5 pr-3">
         {logs.map((log) => (
           <div
             key={log.id}

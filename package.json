@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "db:push": "npx drizzle-kit push",
-    "db:push:seed": "npx drizzle-kit push && npx tsx src/db/seed.ts"
+    "db:push:seed": "npx drizzle-kit push && npx tsx src/db/seed.ts",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:seed": "npx tsx src/db/seed.ts"
   },
   "dependencies": {
     "@node-rs/argon2": "^2.0.2",
