@@ -17,6 +17,8 @@ export default {
         "my-accent-one": "#6246ea",
         "my-accent-two": "#e45858",
         "my-accent-three": "#d1d1e9",
+        "my-accent-blue": "#3da9fc",
+        "my-accent-green": "#078080",
       },
     },
   },

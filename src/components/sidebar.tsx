@@ -10,12 +10,12 @@ const SIDEBAR_ITEMS = [
   {
     icon: HomeIcon,
     text: "Dashboard",
-    href: "/",
+    href: "/dashboard",
   },
   {
     icon: LogsIcon,
     text: "Logs",
-    href: "/logs",
+    href: "/dashboard/logs",
   },
 ];
 

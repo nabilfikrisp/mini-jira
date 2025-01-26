@@ -15,8 +15,9 @@ async function seed() {
     const insertedUsers = await db
       .insert(users)
       .values([
-        { username: "mr.leader", password: hashedPassword, role: "LEAD" },
-        { username: "mr.user 1", password: hashedPassword, role: "TEAM" },
+        { username: "team_leader", password: hashedPassword, role: "LEAD" },
+        { username: "team_member_1", password: hashedPassword, role: "TEAM" },
+        { username: "team_member_2", password: hashedPassword, role: "TEAM" },
       ])
       .returning();
 

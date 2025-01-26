@@ -58,7 +58,7 @@ async function SearchBar() {
 async function CreateTask() {
   return (
     <Link
-      href="dashboard/task/create"
+      href="dashboard/tasks/create"
       className="flex items-center gap-2 rounded-lg bg-my-accent-one px-4 py-2 text-my-bg hover:bg-my-accent-one/90 focus:outline-none"
     >
       <PlusIcon className="h-5 w-5" />
